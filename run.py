@@ -56,24 +56,39 @@ def validate_data(values):
     
     return True
 
+"""# code that was refractored into update_worksheet
 def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided.
-    """
-    # give the user feedback as the program completes, narrow down bugs
+    
+    # docstring:
+    # Update sales worksheet, add new row with the list data provided.
+    
     print("Updating sales worksheet...\n")
     sales_worksheet = SHEET.worksheet("sales")
     sales_worksheet.append_row(data)
     print("Sales worksheet updated successfully.\n")
 
 def update_surplus_worksheet(data):
-    """
-    Update surplus worksheet, add new row with the list data provided.
-    """
+    
+    # docstring:
+    # Update surplus worksheet, add new row with the list data provided.
+    
     print("Updating surplus worksheet...\n")
     surplus_worksheet = SHEET.worksheet("surplus")
     surplus_worksheet.append_row(data)
     print("Surplus worksheet updates successfully")
+
+"""
+
+def update_worksheet(data, worksheet):
+    """
+    Receives a list of integers to be inseted into a worksheet
+    Update the relevant worksheet with the data provided
+    """
+    # give the user feedback as the program completes, narrow down bugs
+    print(f"Updating {worksheet} worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet updated successfully\n")
 
 def calculate_surplus_data(sales_row):
     """
@@ -101,9 +116,9 @@ def main():
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     #call our function and pass it our sales_data list
-    update_sales_worksheet(sales_data)
+    update_worksheet(sales_data, "sales")
     new_surplus_data = calculate_surplus_data(sales_data)
-    update_surplus_worksheet(new_surplus_data)
+    update_worksheet(new_surplus_data, "surplus")
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
